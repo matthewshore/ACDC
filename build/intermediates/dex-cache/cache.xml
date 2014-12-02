@@ -2,8 +2,8 @@
 <pre-dex-items>
 
     <item
-        dex="C:\Users\Matthew\AndroidstudioProjects\SpeechToText\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-c30e376a8a37b42530721aa3276156097e39d8df.jar"
-        jar="C:\Program Files (x86)\Android\android-sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        dex="C:\Users\Matt\Documents\GitHub\ACDC\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-35ecc25ebbc4a302ac184831cb454425d7c4d1cf.jar"
+        jar="C:\Development\adt-bundle-windows-x86_64-20131030\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
