@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,15 +23,48 @@ public class MainActivity extends Activity {
 	private ImageButton btnSpeak;
 	private final int REQ_CODE_SPEECH_INPUT = 100;
 
+    private Button tvMenuButton;
+    private Button fanMenuButton;
+    private Button bedMenuButton;
+    private Button powerMenuButton;
+
+    private PowerMenuFragment powerMenuFragment;
+    private FanMenuFragment fanMenuFragment;
+
+    private static FragmentManager fragmentManager;
+    private static Fragment currentFragment;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+        initFragments();
+
+
+
 		txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
 		btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
 
-		// hide the action bar
+        tvMenuButton = (Button) findViewById(R.id.tv_menu_button);
+        fanMenuButton = (Button) findViewById(R.id.fan_menu_button);
+        bedMenuButton = (Button) findViewById(R.id.bed_menu_button);
+        powerMenuButton = (Button) findViewById(R.id.power_menu_button);
+
+        fanMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFragment(fanMenuFragment);
+            }
+        });
+        powerMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFragment(powerMenuFragment);
+            }
+        });
+
+        // hide the action bar
 		getActionBar().hide();
 
 		btnSpeak.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +76,22 @@ public class MainActivity extends Activity {
 		});
 
 	}
+
+    private void initFragments(){
+        fragmentManager = getFragmentManager();
+        powerMenuFragment = new PowerMenuFragment();
+        fanMenuFragment = new FanMenuFragment();
+
+        fragmentManager.beginTransaction().add(R.id.fragment, powerMenuFragment).commit();
+        fragmentManager.beginTransaction().detach(powerMenuFragment).add(R.id.fragment, fanMenuFragment).commit();
+
+        currentFragment = fanMenuFragment;
+    }
+
+    private void changeFragment(Fragment fragment){
+        fragmentManager.beginTransaction().detach(currentFragment).attach(fragment).commit();
+        currentFragment = fragment;
+    }
 
 	/**
 	 * Showing google speech input dialog

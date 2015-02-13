@@ -24,7 +24,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
 
         <ImageButton
             android:id="@+id/btnSpeak"
@@ -42,5 +43,50 @@
             android:textSize="15dp"
             android:textStyle="normal" />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="left|center_vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/linearLayout"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/tv_menu_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="TV Menu"/>
+            <Button
+                android:id="@+id/fan_menu_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Fan Menu"/>
+            <Button
+                android:id="@+id/bed_menu_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Bed Menu"/>
+            <Button
+                android:id="@+id/power_menu_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Power Menu"/>
+
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/fragment">
+
+            </FrameLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>
