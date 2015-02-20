@@ -191,7 +191,6 @@ public class VoiceRecService extends Service {
             } catch (RemoteException e) {
 
             }
-            //Log.d(TAG, "error = " + error); //$NON-NLS-1$
         }
 
         @Override
@@ -217,7 +216,7 @@ public class VoiceRecService extends Service {
         @Override
         public void onResults(Bundle results) {
             Log.d(TAG, "onResults"); //$NON-NLS-1$
-            ArrayList<String> mResults = (ArrayList<String>)results.get(SpeechRecognizer.RESULTS_RECOGNITION);
+            ArrayList<String> mResults = (ArrayList<String>) results.get(SpeechRecognizer.RESULTS_RECOGNITION);
             Log.d(TAG, String.valueOf(mResults));
             Intent intent = new Intent();
             intent.setAction(COMMAND_ACTION);

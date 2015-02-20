@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 
 /**
  * Created by Becky on 2/12/2015.
+ *
+ * TODO: Add button functionality
  */
 public class PowerMenuFragment extends Fragment {
     private LinearLayout powerLayout;

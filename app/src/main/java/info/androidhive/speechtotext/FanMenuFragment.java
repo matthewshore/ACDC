@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by Becky on 2/12/2015.
+ * TODO: Add button functionality
  */
 public class FanMenuFragment extends Fragment {
 

@@ -22,6 +22,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * TODO: Create TV and Bed fragments
+ */
+
 public class MainActivity extends Activity {
 
     /**
@@ -47,13 +51,15 @@ public class MainActivity extends Activity {
     private Messenger mServiceMessenger;
     private CommandHandler commandHandler;
     private ServiceConnection mConnection = new ServiceConnection() {
+
         /**
          * Purpose:     Handle connection to service, start continuous voice rec
          * Params:      className - Class name of the service that is created
          *              service - pointer to service
          * Returns:     Nothing
-         * @param className
-         * @param service
+         *
+         * @param className Class name of the service that is created
+         * @param service pointer to service
          */
         public void onServiceConnected(ComponentName className, IBinder service) {
             mServiceMessenger = new Messenger(service);
@@ -71,7 +77,8 @@ public class MainActivity extends Activity {
          * Purpose:     Handle disconnection from service
          * Params:      className - Class name of service that is disconnected
          * Returns:     Nothing
-         * @param className
+         *
+         * @param className Class name of service that is disconnected
          */
         public void onServiceDisconnected(ComponentName className) {
             mServiceMessenger = null;
@@ -147,7 +154,7 @@ public class MainActivity extends Activity {
      * Purpose:     Changes fragments, to be used when one of the menu buttons is pressed
      * Params:      fragment - menu fragment to be displayed
      * Returns:     Nothing
-     * @param fragment
+     * @param fragment menu fragment to be displayed
      */
     private void changeFragment(Fragment fragment) {
         fragmentManager.beginTransaction().detach(currentFragment).attach(fragment).commit();
@@ -185,7 +192,7 @@ public class MainActivity extends Activity {
      * Params:      None
      * Returns:     Nothing
      */
-    void doBindService() {
+    private void doBindService() {
         bindService(new Intent(MainActivity.this,
                 VoiceRecService.class), mConnection, Context.BIND_AUTO_CREATE);
         mIsBound = true;
@@ -196,12 +203,24 @@ public class MainActivity extends Activity {
      * Params:      None
      * Returns:     Nothing
      */
-    void doUnbindService() {
+    private void doUnbindService() {
         if (mIsBound) {
             // Detach our existing connection.
             unbindService(mConnection);
             mIsBound = false;
         }
+    }
+
+    /**
+     * Purpose:     Generic method to create a toast with given message and duration
+     * Params:      message - text that should be in toast
+     *              duration - length of toast, use Toast.LENGTH_SHORT, Toast.LENGTH_LONG, etc.
+     * @param message text that should be in toast
+     * @param duration length of toast, use Toast.LENGTH_SHORT, Toast.LENGTH_LONG, etc.
+     */
+    public void toaster(String message, int duration)
+    {
+        Toast.makeText(getApplicationContext(), message, duration).show();
     }
 
     /**
@@ -213,7 +232,7 @@ public class MainActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             ArrayList<String> commands = intent.getStringArrayListExtra("COMMAND");
             Log.d(TAG, "got commands: " + String.valueOf(commands));
-            Toast.makeText(context, "got commands: " + String.valueOf(commands), Toast.LENGTH_SHORT).show();
+            toaster("got commands: " + String.valueOf(commands), Toast.LENGTH_SHORT);
 
             // Voice service only seems to work again once commands are received if you "restart" the service using
             // a cancel message then a start listening message
