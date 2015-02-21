@@ -27,4 +27,7 @@
         <service android:name=".VoiceRecService"/>
     </application>
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
 </manifest>

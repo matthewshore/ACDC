@@ -3,6 +3,7 @@ package info.androidhive.speechtotext;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -85,15 +86,25 @@ public class MainActivity extends Activity {
         }
     };
 
+    /**
+     * Variables related to bluetooth
+     */
+    private BluetoothHandler bluetoothHandler;
+    private static final int REQUEST_ENABLE_BT = 1;
+
+
     private static final String TAG = "MainActivity";
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getActionBar().hide();
+        context = getApplicationContext();
         initFragments();
         initButtons();
+        initBluetooth();
     }
 
     @Override
@@ -117,6 +128,18 @@ public class MainActivity extends Activity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(VoiceRecService.COMMAND_ACTION);
         registerReceiver(commandHandler, intentFilter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bluetoothHandler.openSocket();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        bluetoothHandler.closeSocket();
     }
 
     @Override
@@ -187,6 +210,20 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void initBluetooth() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(bluetoothAdapter == null) {
+            toaster("ERROR: Bluetooth not supported", Toast.LENGTH_LONG);
+        } else {
+            if (!bluetoothAdapter.isEnabled()) {
+                Intent enableBTIntent = new Intent(bluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBTIntent, REQUEST_ENABLE_BT);
+            }
+        }
+        bluetoothHandler = new BluetoothHandler(bluetoothAdapter);
+
+    }
+
     /**
      * Purpose:     Used to connect to service
      * Params:      None
@@ -218,9 +255,9 @@ public class MainActivity extends Activity {
      * @param message text that should be in toast
      * @param duration length of toast, use Toast.LENGTH_SHORT, Toast.LENGTH_LONG, etc.
      */
-    public void toaster(String message, int duration)
+    public static void toaster(String message, int duration)
     {
-        Toast.makeText(getApplicationContext(), message, duration).show();
+        Toast.makeText(context, message, duration).show();
     }
 
     /**
@@ -233,7 +270,7 @@ public class MainActivity extends Activity {
             ArrayList<String> commands = intent.getStringArrayListExtra("COMMAND");
             Log.d(TAG, "got commands: " + String.valueOf(commands));
             toaster("got commands: " + String.valueOf(commands), Toast.LENGTH_SHORT);
-
+            bluetoothHandler.sendMessage("got commands: " + String.valueOf(commands));
             // Voice service only seems to work again once commands are received if you "restart" the service using
             // a cancel message then a start listening message
             Message msg = new Message();
