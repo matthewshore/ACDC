@@ -23,9 +23,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * TODO: Create TV and Bed fragments
- */
+
 
 public class MainActivity extends Activity {
 
@@ -43,6 +41,8 @@ public class MainActivity extends Activity {
     private static FragmentManager fragmentManager;
     private PowerMenuFragment powerMenuFragment;
     private FanMenuFragment fanMenuFragment;
+    private TVMenuFragment tvMenuFragment;
+    private BedMenuFragment bedMenuFragment;
     private static Fragment currentFragment;
 
     /**
@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
     /**
      * Variables related to bluetooth
      */
-    private BluetoothHandler bluetoothHandler;
+    public static BluetoothHandler bluetoothHandler;
     private static final int REQUEST_ENABLE_BT = 1;
 
 
@@ -102,9 +102,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         getActionBar().hide();
         context = getApplicationContext();
+        initBluetooth();
         initFragments();
         initButtons();
-        initBluetooth();
     }
 
     @Override
@@ -159,18 +159,22 @@ public class MainActivity extends Activity {
      * Purpose:     Initializes all menu fragments
      * Params:      None
      * Returns:     Nothing
-     *
-     * TODO: need to add TVMenuFragment and BedMenuFragment
      */
     private void initFragments() {
         fragmentManager = getFragmentManager();
         powerMenuFragment = new PowerMenuFragment();
         fanMenuFragment = new FanMenuFragment();
+        tvMenuFragment = new TVMenuFragment();
+        bedMenuFragment = new BedMenuFragment();
 
         fragmentManager.beginTransaction().add(R.id.fragment, powerMenuFragment).commit();
         fragmentManager.beginTransaction().detach(powerMenuFragment).add(R.id.fragment, fanMenuFragment).commit();
+        fragmentManager.beginTransaction().detach(fanMenuFragment).add(R.id.fragment, bedMenuFragment).commit();
+        fragmentManager.beginTransaction().detach(bedMenuFragment).add(R.id.fragment, tvMenuFragment).commit();
 
-        currentFragment = fanMenuFragment;
+
+
+        currentFragment = tvMenuFragment;
     }
 
     /**
@@ -188,7 +192,6 @@ public class MainActivity extends Activity {
      * Purpose:     Initializes menu buttons
      * Params:      None
      * Returns:     Nothing
-     * TODO: Add OnClickListeners for bed and TV menu buttons
      */
     private void initButtons() {
         tvMenuButton = (Button) findViewById(R.id.tv_menu_button);
@@ -206,6 +209,18 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 changeFragment(powerMenuFragment);
+            }
+        });
+        tvMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFragment(tvMenuFragment);
+            }
+        });
+        bedMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFragment(bedMenuFragment);
             }
         });
     }
@@ -265,11 +280,17 @@ public class MainActivity extends Activity {
      */
     private class CommandHandler extends BroadcastReceiver {
 
+        private String identifierWord = "Test";
         @Override
         public void onReceive(Context context, Intent intent) {
             ArrayList<String> commands = intent.getStringArrayListExtra("COMMAND");
             Log.d(TAG, "got commands: " + String.valueOf(commands));
-            toaster("got commands: " + String.valueOf(commands), Toast.LENGTH_SHORT);
+            //toaster("got commands: " + String.valueOf(commands), Toast.LENGTH_SHORT);
+            for (int i = 0; i <= commands.size(); i++) {
+                if (commands.get(i) == identifierWord) {
+                    toaster( "Got Identifier" , Toast.LENGTH_SHORT);
+                }
+            }
             bluetoothHandler.sendMessage("got commands: " + String.valueOf(commands));
             // Voice service only seems to work again once commands are received if you "restart" the service using
             // a cancel message then a start listening message
