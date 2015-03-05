@@ -10,11 +10,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -34,6 +36,13 @@ public class MainActivity extends Activity {
     private Button fanMenuButton;
     private Button bedMenuButton;
     private Button powerMenuButton;
+
+    //Listener (button as placeholder)
+    private Button listener;
+    private Boolean waitingForCommand = false;
+
+    //Blink LED
+    private Button blinkLED;
 
     /**
      * Variables related to fragment management
@@ -199,6 +208,23 @@ public class MainActivity extends Activity {
         bedMenuButton = (Button) findViewById(R.id.bed_menu_button);
         powerMenuButton = (Button) findViewById(R.id.power_menu_button);
 
+        listener = (Button) findViewById(R.id.listener);
+        listener.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.setText("Listening");
+            }
+        });
+
+        blinkLED = (Button) findViewById(R.id.blinkLED);
+        blinkLED.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bluetoothHandler.sendMessage("LED blink");
+                Log.d(TAG, "Sending BT message");;
+            }
+        });
+
         fanMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -280,16 +306,39 @@ public class MainActivity extends Activity {
      */
     private class CommandHandler extends BroadcastReceiver {
 
-        private String identifierWord = "Test";
+        private String identifierWord = "hello";
+        private String receivedCommand = "";
+        private AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         @Override
         public void onReceive(Context context, Intent intent) {
             ArrayList<String> commands = intent.getStringArrayListExtra("COMMAND");
             Log.d(TAG, "got commands: " + String.valueOf(commands));
             //toaster("got commands: " + String.valueOf(commands), Toast.LENGTH_SHORT);
-            for (int i = 0; i <= commands.size(); i++) {
-                if (commands.get(i) == identifierWord) {
-                    toaster( "Got Identifier" , Toast.LENGTH_SHORT);
+            for (int i = 0; i < commands.size(); i++) {
+                receivedCommand = commands.get(i);
+                if (commands.get(i).toLowerCase().contains(identifierWord)) {
+                    am.playSoundEffect(AudioManager.FX_KEYPRESS_INVALID);
+                    listener.setText("Ready for Command");
+                    toaster("Got Identifier", Toast.LENGTH_SHORT);
+                    Message msg = new Message();
+                    msg.what = VoiceRecService.MSG_RECOGNIZER_CANCEL;
+                    try {
+                        mServiceMessenger.send(msg);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+
+                    Message msg2 = new Message();
+                    msg2.what = VoiceRecService.MSG_RECOGNIZER_START_LISTENING;
+
+                    try {
+                        mServiceMessenger.send(msg2);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 }
+                toaster( receivedCommand, Toast.LENGTH_SHORT);
             }
             bluetoothHandler.sendMessage("got commands: " + String.valueOf(commands));
             // Voice service only seems to work again once commands are received if you "restart" the service using

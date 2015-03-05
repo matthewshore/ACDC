@@ -5,25 +5,36 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="On/Off"/>
+        android:text="On"
+        android:id="@+id/fan_on"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Hotter"/>
+        android:text="Off"
+        android:id="@+id/fan_off"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Colder"/>
+        android:text="Hotter"
+        android:id="@+id/fan_hotter"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Higher"/>
+        android:text="Colder"
+        android:id="@+id/fan_colder"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Lower"/>
+        android:text="Higher"
+        android:id="@+id/fan_higher"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Rotating (On/Off)"/>
+        android:text="Lower"
+        android:id="@+id/fan_lower"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Rotating (On/Off)"
+        android:id="@+id/fan_rotate"/>
 </LinearLayout>

@@ -10,4 +10,16 @@
         android:text="Bed Control Menu"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Knee Up"
+        android:id="@+id/bed_knee_up"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Knee Down"
+        android:id="@+id/bed_knee_down"/>
 </LinearLayout>

@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="Power Menu"/>
 
-            </LinearLayout>
+        </LinearLayout>
             <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -50,5 +50,17 @@
             </FrameLayout>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/listener"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Listening"
+        android:layout_alignParentBottom="true"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listener"
+        android:text="Blink LED"
+        android:id="@+id/blinkLED"/>
 
 </RelativeLayout>
