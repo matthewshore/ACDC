@@ -62,5 +62,11 @@
         android:layout_above="@+id/listener"
         android:text="Blink LED"
         android:id="@+id/blinkLED"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/base_connect_button"
+        android:layout_above="@+id/blinkLED"
+        android:text="Connect to Base"/>
 
 </RelativeLayout>

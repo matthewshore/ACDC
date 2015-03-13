@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -36,6 +37,7 @@ public class MainActivity extends Activity {
     private Button fanMenuButton;
     private Button bedMenuButton;
     private Button powerMenuButton;
+    private Button baseConnectButton;
 
     //Listener (button as placeholder)
     private Button listener;
@@ -100,6 +102,8 @@ public class MainActivity extends Activity {
      */
     public static BluetoothHandler bluetoothHandler;
     private static final int REQUEST_ENABLE_BT = 1;
+    private final BluetoothDiscoveryDialog bluetoothDiscoveryDialog= new BluetoothDiscoveryDialog();
+    private BroadcastReceiver bluetoothDiscoveryReceiver;
 
 
     private static final String TAG = "MainActivity";
@@ -162,6 +166,7 @@ public class MainActivity extends Activity {
 
         // unregister for messages
         unregisterReceiver(commandHandler);
+        unregisterReceiver(bluetoothDiscoveryReceiver);
     }
 
     /**
@@ -180,8 +185,6 @@ public class MainActivity extends Activity {
         fragmentManager.beginTransaction().detach(powerMenuFragment).add(R.id.fragment, fanMenuFragment).commit();
         fragmentManager.beginTransaction().detach(fanMenuFragment).add(R.id.fragment, bedMenuFragment).commit();
         fragmentManager.beginTransaction().detach(bedMenuFragment).add(R.id.fragment, tvMenuFragment).commit();
-
-
 
         currentFragment = tvMenuFragment;
     }
@@ -252,7 +255,7 @@ public class MainActivity extends Activity {
     }
 
     private void initBluetooth() {
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if(bluetoothAdapter == null) {
             toaster("ERROR: Bluetooth not supported", Toast.LENGTH_LONG);
         } else {
@@ -262,7 +265,34 @@ public class MainActivity extends Activity {
             }
         }
         bluetoothHandler = new BluetoothHandler(bluetoothAdapter);
+        baseConnectButton = (Button) findViewById(R.id.base_connect_button);
+        baseConnectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bluetoothHandler.beginDiscovery();
+                bluetoothDiscoveryDialog.show(fragmentManager, "BluetoothDiscoveryDialog");
+                bluetoothDiscoveryReceiver = new BroadcastReceiver() {
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        Log.d(TAG, "found device!");
+                        String action = intent.getAction();
+                        if(BluetoothDevice.ACTION_FOUND.equals(action)) {
+                            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                            bluetoothDiscoveryDialog.addDevice(device);
+                            Log.d(TAG, "Device: " + device.getName());
+                        }
+                    }
+                };
 
+                IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+                registerReceiver(bluetoothDiscoveryReceiver, filter);
+            }
+        });
+
+    }
+
+    public static void connect(BluetoothDevice bluetoothDevice){
+        bluetoothHandler.connect(bluetoothDevice);
     }
 
     /**
@@ -300,6 +330,8 @@ public class MainActivity extends Activity {
     {
         Toast.makeText(context, message, duration).show();
     }
+
+
 
     /**
      * Purpose:     This class is used to receive and deal with messages sent from the VoiceRecService

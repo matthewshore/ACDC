@@ -7,5 +7,7 @@
     <string name="speech_prompt">Say something&#8230;</string>
     <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <string name="tap_on_mic">Tap on mic to speak</string>
+    <string name="bluetooth_dialog_title">Bluetooth Scan</string>
+    <string name="cancel_message">Cancel</string>
 
 </resources>
