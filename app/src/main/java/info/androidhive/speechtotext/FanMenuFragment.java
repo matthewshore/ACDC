@@ -14,7 +14,7 @@ import android.widget.Button;
  */
 public class FanMenuFragment extends Fragment {
 
-    private Button onButton;
+    private Button powerButton;
     private Button offButton;
     private Button hotterButton;
     private Button colderButton;
@@ -29,15 +29,14 @@ public class FanMenuFragment extends Fragment {
 
         View currentView = inflater.inflate(R.layout.fragment_fan, container, false);
         //create buttons
-        onButton = (Button) currentView.findViewById(R.id.fan_on);
-        offButton = (Button) currentView.findViewById(R.id.fan_off);
+        powerButton = (Button) currentView.findViewById(R.id.fan_power);
         hotterButton = (Button) currentView.findViewById(R.id.fan_hotter);
         colderButton = (Button) currentView.findViewById(R.id.fan_colder);
         higherButton = (Button) currentView.findViewById(R.id.fan_higher);
         lowerButton = (Button) currentView.findViewById(R.id.fan_lower);
         rotateButton = (Button) currentView.findViewById(R.id.fan_rotate);
         //set listeners for buttons
-        offButton.setOnClickListener( new View.OnClickListener() {
+        powerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -45,11 +44,43 @@ public class FanMenuFragment extends Fragment {
                 Log.d(TAG, "Sending BT message");
             }
         });
-        onButton.setOnClickListener( new View.OnClickListener() {
+        hotterButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 MainActivity.bluetoothHandler.sendMessage("fan 1");
+                Log.d(TAG, "Sending BT message");
+            }
+        });
+        colderButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MainActivity.bluetoothHandler.sendMessage("fan 2");
+                Log.d(TAG, "Sending BT message");
+            }
+        });
+        lowerButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MainActivity.bluetoothHandler.sendMessage("fan 3");
+                Log.d(TAG, "Sending BT message");
+            }
+        });
+        higherButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MainActivity.bluetoothHandler.sendMessage("fan 4");
+                Log.d(TAG, "Sending BT message");
+            }
+        });
+        rotateButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MainActivity.bluetoothHandler.sendMessage("fan 5");
                 Log.d(TAG, "Sending BT message");
             }
         });

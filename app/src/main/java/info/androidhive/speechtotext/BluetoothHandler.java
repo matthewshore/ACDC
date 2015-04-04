@@ -3,9 +3,11 @@ package info.androidhive.speechtotext;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.os.Handler;
 import android.util.Log;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
@@ -19,6 +21,7 @@ public class BluetoothHandler {
     private static String serverAddress = "";
     private BluetoothSocket bluetoothSocket;
     private OutputStream outputStream;
+    private Handler BTHandler = new Handler();
 
     public BluetoothHandler(BluetoothAdapter bluetoothAdapter) {
         this.bluetoothAdapter = bluetoothAdapter;

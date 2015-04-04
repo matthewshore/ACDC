@@ -104,6 +104,7 @@ public class MainActivity extends Activity {
     private static final int REQUEST_ENABLE_BT = 1;
     private final BluetoothDiscoveryDialog bluetoothDiscoveryDialog= new BluetoothDiscoveryDialog();
     private BroadcastReceiver bluetoothDiscoveryReceiver;
+    private BroadcastReceiver bluetoothMessageReceiver;
 
 
     private static final String TAG = "MainActivity";
@@ -330,8 +331,6 @@ public class MainActivity extends Activity {
     {
         Toast.makeText(context, message, duration).show();
     }
-
-
 
     /**
      * Purpose:     This class is used to receive and deal with messages sent from the VoiceRecService

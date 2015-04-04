@@ -5,13 +5,9 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="On"
-        android:id="@+id/fan_on"/>
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Off"
-        android:id="@+id/fan_off"/>
+        android:text="Power"
+        android:id="@+id/fan_power"/>
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
