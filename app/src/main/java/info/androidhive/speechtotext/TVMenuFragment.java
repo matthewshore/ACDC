@@ -39,7 +39,7 @@ public class TVMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("TV 0");
+                MainActivity.bluetoothHandler.sendMessage("tv 0");
                 Log.d(TAG, "Sending BT message");
             }
         });
@@ -47,7 +47,7 @@ public class TVMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("TV 1");
+                MainActivity.bluetoothHandler.sendMessage("tv 1");
                 Log.d(TAG, "Sending BT message");
             }
         });
@@ -55,7 +55,7 @@ public class TVMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("TV 2");
+                MainActivity.bluetoothHandler.sendMessage("tv 2");
                 Log.d(TAG, "Sending BT message");
             }
         });
@@ -63,7 +63,7 @@ public class TVMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("TV 3");
+                MainActivity.bluetoothHandler.sendMessage("tv 3");
                 Log.d(TAG, "Sending BT message");
             }
         });
@@ -71,7 +71,7 @@ public class TVMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("TV 4");
+                MainActivity.bluetoothHandler.sendMessage("tv 4");
                 Log.d(TAG, "Sending BT message");
             }
         });
@@ -79,7 +79,7 @@ public class TVMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("TV 5");
+                MainActivity.bluetoothHandler.sendMessage("tv 5");
                 Log.d(TAG, "Sending BT message");
             }
         });

@@ -36,7 +36,7 @@ public class PowerMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("Power 0");
+                MainActivity.bluetoothHandler.sendMessage("power 0");
                 Log.d(TAG, "Sending BT message");
             }
         });
@@ -44,7 +44,7 @@ public class PowerMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("Power 1");
+                MainActivity.bluetoothHandler.sendMessage("power 1");
                 Log.d(TAG, "Sending BT message");
             }
         });
@@ -52,7 +52,7 @@ public class PowerMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("Power 2");
+                MainActivity.bluetoothHandler.sendMessage("power 2");
                 Log.d(TAG, "Sending BT message");
             }
         });
@@ -60,7 +60,7 @@ public class PowerMenuFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("Power 3");
+                MainActivity.bluetoothHandler.sendMessage("power 3");
                 Log.d(TAG, "Sending BT message");
             }
         });

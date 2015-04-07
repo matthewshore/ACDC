@@ -344,10 +344,10 @@ public class MainActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             ArrayList<String> commands = intent.getStringArrayListExtra("COMMAND");
             Log.d(TAG, "got commands: " + String.valueOf(commands));
-            //toaster("got commands: " + String.valueOf(commands), Toast.LENGTH_SHORT);
+            toaster("got commands: " + String.valueOf(commands), Toast.LENGTH_SHORT);
             for (int i = 0; i < commands.size(); i++) {
                 receivedCommand = commands.get(i);
-                if (commands.get(i).toLowerCase().contains(identifierWord)) {
+                if (commands.get(i).toLowerCase().contains("fan power")) {
                     am.playSoundEffect(AudioManager.FX_KEYPRESS_INVALID);
                     listener.setText("Ready for Command");
                     toaster("Got Identifier", Toast.LENGTH_SHORT);
@@ -369,7 +369,8 @@ public class MainActivity extends Activity {
                     }
                     break;
                 }
-                toaster( receivedCommand, Toast.LENGTH_SHORT);
+                //toaster( receivedCommand, Toast.LENGTH_SHORT);
+                bluetoothHandler.sendMessage("fan 0");
             }
             bluetoothHandler.sendMessage("got commands: " + String.valueOf(commands));
             // Voice service only seems to work again once commands are received if you "restart" the service using
