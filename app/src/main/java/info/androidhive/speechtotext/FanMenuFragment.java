@@ -15,7 +15,6 @@ import android.widget.Button;
 public class FanMenuFragment extends Fragment {
 
     private Button powerButton;
-    private Button offButton;
     private Button hotterButton;
     private Button colderButton;
     private Button higherButton;
@@ -85,6 +84,8 @@ public class FanMenuFragment extends Fragment {
             }
         });
 
+
+        
 
         return currentView;
     }
