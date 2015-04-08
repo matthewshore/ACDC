@@ -153,7 +153,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        bluetoothHandler.closeSocket();
+        if(bluetoothHandler != null)
+            bluetoothHandler.closeSocket();
     }
 
     @Override
@@ -346,33 +347,41 @@ public class MainActivity extends Activity {
             Log.d(TAG, "got commands: " + String.valueOf(commands));
             toaster("got commands: " + String.valueOf(commands), Toast.LENGTH_SHORT);
             for (int i = 0; i < commands.size(); i++) {
-                receivedCommand = commands.get(i);
-                if (commands.get(i).toLowerCase().contains("fan power")) {
-                    am.playSoundEffect(AudioManager.FX_KEYPRESS_INVALID);
-                    listener.setText("Ready for Command");
-                    toaster("Got Identifier", Toast.LENGTH_SHORT);
-                    Message msg = new Message();
-                    msg.what = VoiceRecService.MSG_RECOGNIZER_CANCEL;
-                    try {
-                        mServiceMessenger.send(msg);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-
-                    Message msg2 = new Message();
-                    msg2.what = VoiceRecService.MSG_RECOGNIZER_START_LISTENING;
-
-                    try {
-                        mServiceMessenger.send(msg2);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
+                receivedCommand = commands.get(i).toLowerCase();
+                if (receivedCommand.contains("power")) {
+                    //am.playSoundEffect(AudioManager.FX_KEYPRESS_INVALID);
+                    //listener.setText("Ready for Command");
+                    bluetoothHandler.sendMessage("fan 0");
+                    //toaster("Got Identifier", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (receivedCommand.contains("hotter")){
+                    bluetoothHandler.sendMessage("fan 1");
+                    break;
+                }
+                if (receivedCommand.contains("colder")){
+                    bluetoothHandler.sendMessage("fan 2");
+                    break;
+                }
+                if (receivedCommand.contains("higher")){
+                    bluetoothHandler.sendMessage("fan 4");
+                    break;
+                }
+                if (receivedCommand.contains("lower")){
+                    bluetoothHandler.sendMessage("fan 3");
+                    break;
+                }
+                if (receivedCommand.contains("rotate")){
+                    bluetoothHandler.sendMessage("fan 5");
+                    break;
+                }
+                if (receivedCommand.contains("fan")){
+                    changeFragment(fanMenuFragment);
                     break;
                 }
                 //toaster( receivedCommand, Toast.LENGTH_SHORT);
-                bluetoothHandler.sendMessage("fan 0");
             }
-            bluetoothHandler.sendMessage("got commands: " + String.valueOf(commands));
+            //bluetoothHandler.sendMessage("got commands: " + String.valueOf(commands));
             // Voice service only seems to work again once commands are received if you "restart" the service using
             // a cancel message then a start listening message
             Message msg = new Message();
