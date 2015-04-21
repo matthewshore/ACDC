@@ -5,21 +5,12 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Top Outlet: On"
+        android:text=" Outlet On"
         android:id="@+id/power_on_1_button"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Top Outlet: Off"
+        android:text="Outlet Off"
         android:id="@+id/power_off_1_button"/>
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Bottom Outlet: On"
-        android:id="@+id/power_on_2_button"/>
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Bottom Outlet: Off"
-        android:id="@+id/power_off_2_button"/>
+
 </LinearLayout>

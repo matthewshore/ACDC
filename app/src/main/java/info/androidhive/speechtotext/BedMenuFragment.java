@@ -16,6 +16,8 @@ public class BedMenuFragment extends Fragment {
 
     private Button kneeUp;
     private Button kneeDown;
+    private Button headUp;
+    private Button headDown;
     private static String TAG = "BedMenuFragment";
 
     @Override
@@ -26,17 +28,12 @@ public class BedMenuFragment extends Fragment {
         //create buttons
         kneeDown = (Button) currentView.findViewById(R.id.bed_knee_down);
         kneeUp = (Button) currentView.findViewById(R.id.bed_knee_up);
+        headUp = (Button) currentView.findViewById(R.id.bed_head_up);
+        headDown = (Button) currentView.findViewById(R.id.bed_head_down);
+        
 
         //set listeners for buttons
         kneeDown.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("bed 0");
-                Log.d(TAG, "Sending BT message");
-            }
-        });
-        kneeUp.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -44,7 +41,31 @@ public class BedMenuFragment extends Fragment {
                 Log.d(TAG, "Sending BT message");
             }
         });
+        kneeUp.setOnClickListener( new View.OnClickListener() {
 
-        return inflater.inflate(R.layout.fragment_bed, container, false);
+            @Override
+            public void onClick(View v) {
+                MainActivity.bluetoothHandler.sendMessage("bed 0");
+                Log.d(TAG, "Sending BT message");
+            }
+        });
+        headUp.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MainActivity.bluetoothHandler.sendMessage("bed 2");
+                Log.d(TAG, "Sending BT message");
+            }
+        });
+        headDown.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MainActivity.bluetoothHandler.sendMessage("bed 3");
+                Log.d(TAG, "Sending BT message");
+            }
+        });
+
+        return currentView;
     }
 }

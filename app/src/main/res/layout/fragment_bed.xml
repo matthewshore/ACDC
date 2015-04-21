@@ -22,4 +22,14 @@
         android:layout_height="wrap_content"
         android:text="Knee Down"
         android:id="@+id/bed_knee_down"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Head Up"
+        android:id="@+id/bed_head_up"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Head Down"
+        android:id="@+id/bed_head_down"/>
 </LinearLayout>

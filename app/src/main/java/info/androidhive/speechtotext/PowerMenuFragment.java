@@ -20,19 +20,16 @@ import android.widget.LinearLayout;
 public class PowerMenuFragment extends Fragment {
     private LinearLayout powerLayout;
     private Button onButton1;
-    private Button onButton2;
     private Button offButton1;
-    private Button offButton2;
+
     private static String TAG = "PowerMenuFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View currentView = inflater.inflate(R.layout.fragment_power, container, false);
         onButton1 = (Button) currentView.findViewById(R.id.power_on_1_button);
-        onButton2 = (Button) currentView.findViewById(R.id.power_on_2_button);
         offButton1 = (Button) currentView.findViewById(R.id.power_off_1_button);
-        offButton2 = (Button) currentView.findViewById(R.id.power_off_2_button);
-        onButton1.setOnClickListener( new View.OnClickListener() {
+        offButton1.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -40,7 +37,7 @@ public class PowerMenuFragment extends Fragment {
                 Log.d(TAG, "Sending BT message");
             }
         });
-        offButton1.setOnClickListener( new View.OnClickListener() {
+        onButton1.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -48,22 +45,7 @@ public class PowerMenuFragment extends Fragment {
                 Log.d(TAG, "Sending BT message");
             }
         });
-        onButton2.setOnClickListener( new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("power 2");
-                Log.d(TAG, "Sending BT message");
-            }
-        });
-        offButton2.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("power 3");
-                Log.d(TAG, "Sending BT message");
-            }
-        });
         return currentView;
     }
 }

@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 public class TVMenuFragment extends Fragment {
 
     private Button powerButton;
-    private Button inputButton;
     private Button channelUpButton;
     private Button channelDownButton;
     private Button volumeUpButton;
@@ -29,7 +28,6 @@ public class TVMenuFragment extends Fragment {
         View currentView = inflater.inflate(R.layout.fragment_tv, container, false);
         //create buttons
         powerButton = (Button) currentView.findViewById(R.id.tv_power);
-        inputButton = (Button) currentView.findViewById(R.id.tv_input);
         channelUpButton = (Button) currentView.findViewById(R.id.tv_channel_up);
         channelDownButton = (Button) currentView.findViewById(R.id.tv_channel_down);
         volumeUpButton = (Button) currentView.findViewById(R.id.tv_volume_up);
@@ -43,23 +41,8 @@ public class TVMenuFragment extends Fragment {
                 Log.d(TAG, "Sending BT message");
             }
         });
-        inputButton.setOnClickListener( new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("tv 1");
-                Log.d(TAG, "Sending BT message");
-            }
-        });
         channelUpButton.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("tv 2");
-                Log.d(TAG, "Sending BT message");
-            }
-        });
-        channelDownButton.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -67,7 +50,7 @@ public class TVMenuFragment extends Fragment {
                 Log.d(TAG, "Sending BT message");
             }
         });
-        volumeUpButton.setOnClickListener( new View.OnClickListener() {
+        channelDownButton.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -75,11 +58,19 @@ public class TVMenuFragment extends Fragment {
                 Log.d(TAG, "Sending BT message");
             }
         });
+        volumeUpButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MainActivity.bluetoothHandler.sendMessage("tv 1");
+                Log.d(TAG, "Sending BT message");
+            }
+        });
         volumeDownButton.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                MainActivity.bluetoothHandler.sendMessage("tv 5");
+                MainActivity.bluetoothHandler.sendMessage("tv 2");
                 Log.d(TAG, "Sending BT message");
             }
         });

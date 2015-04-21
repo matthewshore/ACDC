@@ -348,13 +348,13 @@ public class MainActivity extends Activity {
         public final void run(){
             for (int i = 0; i < commandsToParse.size(); i++) {
                 currentCommand = commandsToParse.get(i).toLowerCase();
-                if (currentCommand.contains("power")) {
+                /*if (currentCommand.contains("power")) {
                     //am.playSoundEffect(AudioManager.FX_KEYPRESS_INVALID);
                     //listener.setText("Ready for Command");
                     //bluetoothHandler.sendMessage("fan 0");
                     toaster("Power!", Toast.LENGTH_SHORT);
                     break;
-                }
+                }*/
                 if (currentCommand.contains("hotter")){
                     bluetoothHandler.sendMessage("fan 1");
                     break;
@@ -377,6 +377,61 @@ public class MainActivity extends Activity {
                 }
                 if (currentCommand.contains("fan")){
                     changeFragment(fanMenuFragment);
+                    break;
+                }
+                if (currentCommand.contains("knee up")){
+                    bluetoothHandler.sendMessage("bed 0");
+                    toaster("Knee Up!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("knee down")){
+                    bluetoothHandler.sendMessage("bed 1");
+                    toaster("Knee Down!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("head up")){
+                    bluetoothHandler.sendMessage("bed 2");
+                    toaster("Head Up!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("head down")){
+                    bluetoothHandler.sendMessage("bed 3");
+                    toaster("Head Down!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("tv power")){
+                    bluetoothHandler.sendMessage("tv 0");
+                    toaster("TV Power!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("channel up")){
+                    bluetoothHandler.sendMessage("tv 3");
+                    toaster("Channel Up!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("channel down")){
+                    bluetoothHandler.sendMessage("tv 4");
+                            toaster("Channel Down!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("volume up")){
+                    bluetoothHandler.sendMessage("tv 1");
+                    toaster("Volume Up!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("volume down")){
+                    bluetoothHandler.sendMessage("tv 2");
+                    toaster("Volume Down!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("outlet off")){
+                    bluetoothHandler.sendMessage("power 0");
+                    toaster("Outlet Off!", Toast.LENGTH_SHORT);
+                    break;
+                }
+                if (currentCommand.contains("outlet on")){
+                    bluetoothHandler.sendMessage("power 1");
+                    toaster("Outlet On!", Toast.LENGTH_SHORT);
                     break;
                 }
                 //toaster( receivedCommand, Toast.LENGTH_SHORT);
