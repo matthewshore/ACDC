@@ -2,35 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Fan Remote"
+        android:id="@+id/tv_title"
+        android:layout_gravity="center_horizontal" />
+    <Button
+        style="@style/buttonStyle"
         android:text="Power"
         android:id="@+id/fan_power"/>
 
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Hotter"
         android:id="@+id/fan_hotter"/>
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Colder"
         android:id="@+id/fan_colder"/>
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Higher"
         android:id="@+id/fan_higher"/>
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Lower"
         android:id="@+id/fan_lower"/>
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Rotate"
         android:id="@+id/fan_rotate"/>
 </LinearLayout>

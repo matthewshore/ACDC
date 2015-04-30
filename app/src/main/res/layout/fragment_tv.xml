@@ -12,37 +12,27 @@
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Power"
-        android:id="@+id/tv_power"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/tv_power"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Channel Up"
-        android:id="@+id/tv_channel_up"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/tv_channel_up" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Channel Down"
-        android:id="@+id/tv_channel_down"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/tv_channel_down"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Volume Up"
-        android:id="@+id/tv_volume_up"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/tv_volume_up"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonStyle"
         android:text="Volume Down"
-        android:id="@+id/tv_volume_down"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/tv_volume_down"/>
 </LinearLayout>

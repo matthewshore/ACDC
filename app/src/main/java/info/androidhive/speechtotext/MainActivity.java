@@ -213,23 +213,6 @@ public class MainActivity extends Activity {
         bedMenuButton = (Button) findViewById(R.id.bed_menu_button);
         powerMenuButton = (Button) findViewById(R.id.power_menu_button);
 
-        listener = (Button) findViewById(R.id.listener);
-        listener.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.setText("Listening");
-            }
-        });
-
-        blinkLED = (Button) findViewById(R.id.blinkLED);
-        blinkLED.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bluetoothHandler.sendMessage("LED blink");
-                Log.d(TAG, "Sending BT message");;
-            }
-        });
-
         fanMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -51,22 +51,10 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/listener"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Listening"
-        android:layout_alignParentBottom="true"/>
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/listener"
-        android:text="Blink LED"
-        android:id="@+id/blinkLED"/>
-    <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/base_connect_button"
-        android:layout_above="@+id/blinkLED"
-        android:text="Connect to Base"/>
+        android:text="Connect to Base"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
